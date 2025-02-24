@@ -1,0 +1,90 @@
+/* Basic reset for consistent styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("media/space.webp");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    margin-top: 80px;
+}
+
+/* Container for the calculator */
+.calculator-container {
+    width: fit-content;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #b0bec599;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: 3s;
+}
+
+/* Display area styling */
+.calculator-display {
+    /*Used a combination of gray radiant colors to go from left (dark) to right (bright)
+    I chose to right light since the numbers on the display start to be added from the right.*/
+    background: linear-gradient(to right, #546E7A, #78909C,#b0bec5);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid lightgray;
+    font-size: 2.2rem;
+    text-align: left;
+    padding: 0.4rem;
+    padding-top: 1.2rem;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* FLex layout for buttons */
+.calculator-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.calculator-buttons-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Basic styling for buttons */
+.calculator-buttons-wrap button {
+    padding: 25px;
+    width: 80px;
+    margin: 3px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #b0bec5;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+/* Hover effects for buttons */
+.calculator-buttons button:hover {
+    background-color: #fff1c6;
+
+}
+
+.history-container {
+    background-color: lightgray;
+}
+
+@media only screen and (max-width: 400px) {
+    .calculator-display {
+        font-size: 2rem;
+    }
+    .calculator-buttons-wrap button  {
+        width: 70px;
+        font-size: 1.2rem;
+    }
+}
