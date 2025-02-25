@@ -1,10 +1,12 @@
-/* Basic reset for consistent styling */
+/* Basic reset for consistent styling and applies the same font family to all elements*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Inconsolata", serif;
 }
 
+/* Sets the background image and its properties to make it adjust and centered*/
 body {
     background-image: url("media/space.webp");
     background-repeat: no-repeat;
@@ -12,10 +14,12 @@ body {
     background-size: cover;
 }
 
+/*sets the color to white for the header, centers it, and brings it down from the margin so it won't be close to the top*/
 h1 {
     color: white;
     text-align: center;
-    margin-top: 80px;
+    margin-top: 65px;
+    font-size: 2rem;
 }
 
 /* Container for the calculator */
@@ -26,6 +30,8 @@ h1 {
     background-color: #b0bec599;
     border: 1px solid #ccc;
     border-radius: 8px;
+
+    /*transition helps to provide a smooth transition when the background color changes after the user clicks on the equal button*/
     transition: 1s;
 }
 
@@ -36,10 +42,11 @@ h1 {
     background: linear-gradient(to right, #546E7A, #78909C,#b0bec5);
     margin-bottom: 1rem;
     border-bottom: 2px solid lightgray;
-    font-size: 2.2rem;
+    font-size: 2rem;
     text-align: left;
     padding: 0.4rem;
     padding-top: 1.2rem;
+    padding-left: 0.7rem;
     border-radius: 4px;
     overflow: hidden;
 }
@@ -59,13 +66,14 @@ h1 {
 /* Basic styling for buttons */
 .calculator-buttons-wrap button {
     padding: 25px;
-    width: 80px;
+    width: 70px;
     margin: 3px;
     font-size: 1.5rem;
     border: none;
     border-radius: 4px;
     background-color: #b0bec5;
     cursor: pointer;
+    /*transition to have a smooth background-color change on hover*/
     transition: background-color 0.5s ease;
 }
 
@@ -75,16 +83,27 @@ h1 {
 
 }
 
-.history-container {
-    background-color: lightgray;
-}
-
-@media only screen and (max-width: 400px) {
+/*to increase the font sizes and widths for the calculator display and buttons on larger screen sizes*/
+@media only screen and (min-width: 400px) {
+    h1 {
+        font-size: 3rem;
+    }
+    
     .calculator-display {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     .calculator-buttons-wrap button  {
-        width: 70px;
-        font-size: 1.2rem;
+        width: 80px;
+        font-size: 1.7rem;
+    }
+}
+
+/*to increase the font sizes for the calculator display and buttons on larger screen sizes*/
+@media only screen and (min-width: 720px) {
+    .calculator-display {
+        font-size: 2.4rem;
+    }
+    .calculator-buttons-wrap button  {
+        font-size: 1.9rem;
     }
 }

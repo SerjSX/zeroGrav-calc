@@ -6,12 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web-Based Calculator</title>
     <link rel="stylesheet" href="styles.css">
+
+    <!--Loads the font Inconsolata for a terminal-like font display. You know. Space. Retro. :)-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>zeroGrav Calc</h1>
-    
+    <!--The following div element will store all elements displayed on the screen-->
     <div class="flex-container">
+        <!--Header title-->
+        <h1>zeroGrav Calc</h1>
+
+        <!--This main element, .calculator-container, stores the calculator itself and the elements for it-->
         <main class="calculator-container" id="calculator-container">
             <!-- Calculator Display -->
             <section id="display" class="calculator-display">
@@ -20,6 +28,7 @@
 
             <!-- Calculator Buttons -->
             <section class="calculator-buttons">
+                <!--.calculator-buttons-wrap stores the buttons of each row-->
                 <div class="calculator-buttons-wrap">
                     <button type="button" data-value="C">C</button>
                     <button type="button" data-value="D">D</button>
@@ -55,11 +64,10 @@
                     <button type="button" data-value="+">+</button>
                 </div>
             </section>
-
         </main>
-
     </div>
 
+    <!--Loads the javascript file-->
     <script src="script.js"></script>
 </body>
 

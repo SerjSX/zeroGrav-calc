@@ -1,7 +1,10 @@
 // Wait for the DOM to fully load before running scripts​
 document.addEventListener('DOMContentLoaded', () => {
+    //grabs and stores the display and button container element
     const display = document.getElementById('display');
     const buttonsContainer = document.querySelector('.calculator-buttons');
+
+    //currOp stores the current operation the user clicked on
     let currOp;
 
     // Attach event listener for button clicks​
@@ -17,8 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Retrieve the button's value from data attribute​
         const buttonValue = target.getAttribute('data-value');
-        console.log(buttonValue);
+
         
+        // If the user clicked on C, = or D then those are considered special operations and their
+        // respective functions are called. Any other button is passed to the updateDisplay(buttonValue) function
         if (buttonValue === "C") {
             clearDisplay();
         } else if (buttonValue === "=") {
@@ -37,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // storing the current values in the display to identify if
             // it starts with 0 or no
             let currContent = display.innerHTML;
-            let lastContent = currContent.at(-1);
+            let lastContent = currContent.at(-1); //stores the last value of the display to prevent illegal displays afterwards
 
 
             //if the length of the current display is 16, add a line break
@@ -45,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currContent.length == "16") {
                 display.innerHTML = display.innerHTML + "<br>";
             } else if (currContent.length == "35") {
-                alert("Reached the maximum limit");
+                alert("Reached the maximum limit - 35 character count");
             }
 
             // if the current content in display is 0, then just
@@ -53,27 +58,25 @@ document.addEventListener('DOMContentLoaded', () => {
             // this way if a number is put like 1 2 then 0 would be removed
             // intOrNo is added to the condition so this would apply only when
             // the user clicks on another number button. Ex. 09 would be 9 but
-            // 0+ would stay as such 
-            if (currContent.trim() == "0" && checkInt(buttonValue) == true) {
+            // 0+ would stay as such. I have also added ( and ) since 0( or 0) are not possible rather are illegal
+            if ((currContent.trim() == "0" && (checkInt(buttonValue) == true || buttonValue == "(" || buttonValue == ")"))) {
                 display.innerHTML = value;
             } else {
                 // the following condition is to prevent the user in putting multiple icons like 
                 // + * / and - next to each other. 
-                // ex, the user can't insert ** becuase an operation like that is not possible
+                // ex, the user can't insert ++ becuase an operation like that is not possible
                 // exceptions are done with () since it is possible to have * (x+y)
-                if ((lastContent == "*" || lastContent == "+" || lastContent == "-" 
-                    || lastContent == "/") && checkInt(buttonValue) == false && buttonValue != "(" && buttonValue != ")" 
+                // ** is an exception too since that is a power operation - if the user finds out about it ;)
+                if ((lastContent == "+" || lastContent == "-" || lastContent == "/") && 
+                     checkInt(buttonValue) == false && buttonValue != "(" && buttonValue != ")" 
                     && buttonValue != ".") {
                     // resets the value to empty so the program does not add anything on the display
                     value = ""; 
                 }
 
-                // if the user chose division and then typed 0, throw an error alert because division by 0 is not possible
-                if (lastContent == "/" && buttonValue == "0") {
-                    alert("You cannot divide by 0! Please enter another number.");
-                } else { //else update the display
-                    display.innerHTML = display.innerHTML + value;
-                }
+                // adds the value to the current display content
+                display.innerHTML = display.innerHTML + value;
+                
             }
         }
 
@@ -84,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         */
         function computeResult() {
 
-            //some animation to do when the user clicks on the equal button - changes color to yellow then back to original
+            //some animation to do when the user clicks on the equal button - changes color to a lighter shade of yellow then back to original
             const calc = document.getElementById("calculator-container");
             setTimeout(function() {
                 calc.style.backgroundColor = "rgb(255, 255, 104)";
@@ -93,7 +96,18 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(function() {
                 calc.style.backgroundColor = "#b0bec599";
             },500);
-            display.innerHTML = splitByLimit(eval(display.innerHTML.replaceAll("<br>", "")));
+
+            // storing the result in a variable to track division by zero error
+            const result = splitByLimit(eval(display.innerHTML.replaceAll("<br>", "")));
+
+            // if the result is not Infinity, hence the user didn't divide by 0, then display the result
+            if (result != Infinity) {
+                display.innerHTML = result;
+            // if it is Infinity, then throw an alert to inform the user of the illegal operation
+            } else {
+                alert("You cannot divide by 0!");
+            }
+
         }
 
         /**​
@@ -107,14 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // returns true if the entered number is an integer, and false if it is not
         function checkInt(num) {
             return !Number.isNaN(Number(num));
-
         }
 
         // this function returns an answer with a break line if it's too long.
         function splitByLimit(num) {
             num = String(num);
             if (num.length > "16" && num.length <= "35") {
-                console.log("returned")
+                //adds a line break between the limit and the rest of the content sliced
                 return num.slice(0,16) + "<br>" + num.slice(16);
             } else {
                 return num;
@@ -134,3 +147,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 });
+
