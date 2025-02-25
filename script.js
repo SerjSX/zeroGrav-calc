@@ -87,12 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
             //some animation to do when the user clicks on the equal button - changes color to yellow then back to original
             const calc = document.getElementById("calculator-container");
             setTimeout(function() {
-                calc.style.backgroundColor = "yellow";
+                calc.style.backgroundColor = "rgb(255, 255, 104)";
             }, 10);
 
             setTimeout(function() {
                 calc.style.backgroundColor = "#b0bec599";
-            },1000);
+            },500);
             display.innerHTML = splitByLimit(eval(display.innerHTML.replaceAll("<br>", "")));
         }
 
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // this function removes one item from the display
         function delOne() {
             // if there are no numbers then put 0 from the else condition
-            if (display.innerHTML != 1) {
+            if (display.innerHTML.length != 1) {
                 // splits the display string to exclude the last character/number
                  display.innerHTML = display.innerHTML.slice(0,display.innerHTML.length-1);
             } else {
