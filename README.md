@@ -1,3 +1,4 @@
+![Screenshot of zeroGrav calc](https://i.ibb.co/tpXGtrpj/Screenshot-2025-02-26-at-15-13-51-Web-Based-Calculator.png)
 # zeroGrav calc
 This is a simple website to do calculator operations. Built by HTML, CSS and JavaScript, for an assignment at a web development course at uni.
 
