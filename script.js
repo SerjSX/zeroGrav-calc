@@ -2,6 +2,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     //grabs and stores the display and button container element
     const display = document.getElementById('display');
+
+    //setting to 0 by javascript because when the page loads and 0 was from html it was adding unnecessary spaces which was causing errors
+    display.innerHTML = 0;
+
     const buttonsContainer = document.querySelector('.calculator-buttons');
 
     //currOp stores the current operation the user clicked on
@@ -16,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     */
     function handleButtonClick(event) {
         const target = event.target;
-        if (target.tagName.toLowerCase() !== 'button') return;
+        if (target.tagName.toLowerCase() !== 'button' && target.tagName.toLowerCase() !== 'img') return;
 
         // Retrieve the button's value from data attribute​
         const buttonValue = target.getAttribute('data-value');
@@ -66,16 +70,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 // + * / and - next to each other. 
                 // ex, the user can't insert ++ becuase an operation like that is not possible
                 // exceptions are done with () since it is possible to have * (x+y)
-                // ** is an exception too since that is a power operation - if the user finds out about it ;)
-                if ((lastContent == "+" || lastContent == "-" || lastContent == "/") && 
+                if ((lastContent == "+" || lastContent == "-" || lastContent == "/" || lastContent == "*") && 
                      checkInt(buttonValue) == false && buttonValue != "(" && buttonValue != ")" 
                     && buttonValue != ".") {
-                    // resets the value to empty so the program does not add anything on the display
-                    value = ""; 
+                    // replaces the last operation typed in display with the one the user wants to do. For example if the user has:
+                    // 4+
+                    // and the user clicks on /
+                    // it becomes 4/
+                    display.innerHTML = display.innerHTML.slice(0,display.innerHTML.length-1) + value;
+                } else {
+                    // adds the value to the current display content
+                    display.innerHTML = display.innerHTML + value;
                 }
 
-                // adds the value to the current display content
-                display.innerHTML = display.innerHTML + value;
+
                 
             }
         }

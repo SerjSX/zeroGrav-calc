@@ -14,12 +14,34 @@ body {
     background-size: cover;
 }
 
+/*Styling properties for the nav element that stores the title of my page and the link to the Github page*/
+nav {
+    display: flex;
+    align-items: center;
+    background-color: lightgray;
+    padding: 10px 20px 10px 20px;
+    width: fit-content;
+    margin: 0 auto;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
 /*sets the color to white for the header, centers it, and brings it down from the margin so it won't be close to the top*/
 h1 {
-    color: white;
-    text-align: center;
-    margin-top: 65px;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    padding-right: 25px;
+}
+
+/*styling the image so the size would be smaller and adding a hover effect since it's wrapped by an anchor link*/
+nav img {
+    width: 40px;
+    padding: 5px;
+    border-radius: 30px;
+    transition: background-color 1s;
+}
+
+nav img:hover {
+    background-color: #fff1c6;
 }
 
 /* Container for the calculator */
@@ -80,13 +102,12 @@ h1 {
 /* Hover effects for buttons */
 .calculator-buttons button:hover {
     background-color: #fff1c6;
-
 }
 
 /*to increase the font sizes and widths for the calculator display and buttons on larger screen sizes*/
 @media only screen and (min-width: 400px) {
     h1 {
-        font-size: 3rem;
+        font-size: 1.8rem;
     }
     
     .calculator-display {
