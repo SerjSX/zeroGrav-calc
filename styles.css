@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Inconsolata", serif;
+    font-family: "Inconsolata", monospace;
 }
 
 /* Sets the background image and its properties to make it adjust and centered*/

@@ -86,26 +86,35 @@ document.addEventListener('DOMContentLoaded', () => {
         * The input is controlled, so no malicious act can be done with the function
         */
         function computeResult() {
-
             //some animation to do when the user clicks on the equal button - changes color to a lighter shade of yellow then back to original
-            const calc = document.getElementById("calculator-container");
-            setTimeout(function() {
-                calc.style.backgroundColor = "rgb(255, 255, 104)";
-            }, 10);
+            changeBackColor("rgb(255, 255, 104)")
 
-            setTimeout(function() {
-                calc.style.backgroundColor = "#b0bec599";
-            },500);
+            // wrapping in a try-catch blocks so in case an error is thrown from eval, the program catches
+            // visualizes the error by red background and logs it in the console.
+            try {
+                /** 
+                    storing the result in a variable to track division by zero error
+                    the result is passed through some operations:
+                        1. all <br> are replaced by empty string to prevent errors
+                        2. the result is passed as parameter to the function splitByLimit() to add br if the result
+                            is too long.
+                **/
+                const result = splitByLimit(eval(display.innerHTML.replaceAll("<br>", "")));
 
-            // storing the result in a variable to track division by zero error
-            const result = splitByLimit(eval(display.innerHTML.replaceAll("<br>", "")));
+                // if the result is not Infinity, hence the user didn't divide by 0, then display the result
+                if (result != Infinity) {
+                    display.innerHTML = result;
+                // if it is Infinity, then throw an alert to inform the user of the illegal operation
+                } else {
+                    alert("You cannot divide by 0!");
+                }
+            }
+            catch (err) {
+                //changes backgroundColor of calc to red then back to original
+                changeBackColor("red");
 
-            // if the result is not Infinity, hence the user didn't divide by 0, then display the result
-            if (result != Infinity) {
-                display.innerHTML = result;
-            // if it is Infinity, then throw an alert to inform the user of the illegal operation
-            } else {
-                alert("You cannot divide by 0!");
+                //logs the error in console
+                console.log(err);              
             }
 
         }
@@ -116,9 +125,12 @@ document.addEventListener('DOMContentLoaded', () => {
         function clearDisplay() {
             display.innerHTML = "0";
             currOp = null;
+
+            //changes the calc's background color to gray
+            changeBackColor("gray");
         }
 
-        // returns true if the entered number is an integer, and false if it is not
+        // returns true if the entered number is an integer, and false if it is not. Used in some conditional testing above
         function checkInt(num) {
             return !Number.isNaN(Number(num));
         }
@@ -144,6 +156,22 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 display.innerHTML = "0";
             }
+        }
+
+        //this function changes the background color of the calculator to another given color (paramether toColor), then back to original
+        function changeBackColor(toColor) {
+            //grabs the calculator element
+            const calc = document.getElementById("calculator-container");
+
+            // first changes the backgroundcolor to the user passed color as paramether, 10ms
+            setTimeout(function() {
+                calc.style.backgroundColor = toColor;
+            }, 10);
+
+            // then changes it back after 500ms to the default color
+            setTimeout(function() {
+                calc.style.backgroundColor = "#b0bec599";
+            },500); 
         }
     };
 });
