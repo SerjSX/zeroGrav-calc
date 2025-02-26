@@ -19,3 +19,4 @@ Uses eval() by JavaScript
 - Colors for successful equal operation (light yellow), clearing display (gray), an error from the eval operation (red, and logs the error in the console)
 - Font family is console-like, that is the vibe I was going for
 - Deleting one character from the display with D button
+- . button for decimal operations too
