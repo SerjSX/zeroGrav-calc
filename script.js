@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Retrieve the button's value from data attribute​
         const buttonValue = target.getAttribute('data-value');
-
         
         // If the user clicked on C, = or D then those are considered special operations and their
         // respective functions are called. Any other button is passed to the updateDisplay(buttonValue) function
@@ -53,8 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // if it exceeds 32, throw an alert to notify that the user reached the limit
             if (currContent.length == "16") {
                 display.innerHTML = display.innerHTML + "<br>";
-            } else if (currContent.length == "35") {
-                alert("Reached the maximum limit - 35 character count");
+            } else if (currContent.length == "36") {
+                alert("Reached the maximum limit - 32 character count");
+                return -1;
             }
 
             // if the current content in display is 0, then just
